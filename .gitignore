@@ -1,0 +1,11 @@
+# python
+.otter/
+dist/
+
+# python
+*.egg-info
+__pycache__
+
+# dev
+.idea/
+*.json
