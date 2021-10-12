@@ -188,19 +188,20 @@ def sync(args):
 def login(args):
     cfg = deserialize()
 
-    url = input_default("URL", cfg['url'])
-    cfg['url'] = url.rstrip('/')
+    url = input_default("URL", cfg['url'] if 'url' in cfg else None)
+    url = url.rstrip('/')
+    cfg['url'] = url
     serialize(cfg)
 
     # if not validators.url(url):
     #     sys.exit(1)
 
     databases = rest.get_databases_json(url)
-    odoo_db = input_select_list_default("Database", databases, cfg['db'])
+    odoo_db = input_select_list_default("Database", databases, cfg['db'] if 'db' in cfg else None)
     cfg['db'] = odoo_db
     serialize(cfg)
 
-    username = input_default("Username", cfg['user'])
+    username = input_default("Username", cfg['user'] if 'user' in cfg else None)
     cfg['user'] = username
     serialize(cfg)
 
@@ -229,11 +230,11 @@ def login(args):
 
 
 def logout(args):
-    cfg = deserialize_file(args)
-    user = cfg['user']
+    cfg = deserialize()
+    user = cfg['user'] if 'user' in cfg else None
     if 'session' in cfg:
         del cfg['session']
-        serialize_file(args, cfg)
+        serialize(cfg)
         print("Successfully logged out as user '" + user + "'")
     else:
         print("Already logged out")
