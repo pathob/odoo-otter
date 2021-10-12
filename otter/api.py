@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from sqlalchemy.exc import NoResultFound
 
 import otter.database.query as db

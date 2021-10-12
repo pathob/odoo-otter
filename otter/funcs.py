@@ -1,10 +1,5 @@
-import logging
-
-import requests
-
 from otter.api import *
 from otter.config import *
-from otter.const import OTTER_CFG
 from otter.database.query import *
 from otter.errors import *
 from otter.odoo import rest

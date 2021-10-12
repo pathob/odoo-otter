@@ -1,5 +1,6 @@
-THIRD = 1.0/3
 import math
+
+THIRD = 1.0/3
 
 
 def float_mod(num):
