@@ -1,6 +1,12 @@
 Otter - The Odoo time tracker
 =============================
 
+[![PyPI version](https://badge.fury.io/py/odoo-otter.svg)](https://badge.fury.io/py/odoo-otter)
+[![Latest Release](https://img.shields.io/badge/release-latest-brightgreen)](https://github.com/pathob/odoo-otter/releases/latest)
+[![.github/workflows/ci.yaml](https://github.com/pathob/odoo-otter/actions/workflows/ci.yaml/badge.svg?event=push)](https://github.com/pathob/odoo-otter/actions/workflows/ci.yaml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 Note: This project is still in an early development stage!
 
 ## Installation and upgrade
@@ -10,6 +16,8 @@ Installation and upgrade can simply be done with Pip:
 ```
 pip install odoo-otter --upgrade
 ```
+
+Alternatively, you can download one of the prebuilt standalone binaries from the [latest releases](https://github.com/pathob/odoo-otter/releases/latest) and put it into your system's path.
 
 After installation or upgrade, check the installation with:
 
