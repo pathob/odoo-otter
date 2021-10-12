@@ -1,0 +1,64 @@
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux
+            arch: x64
+          - os: macos-latest
+            platform: darwin
+            arch: x64
+          - os: windows-latest
+            platform: win32
+            arch: x86
+            ext: .exe
+          - os: windows-latest
+            platform: win32
+            arch: x64
+            ext: .exe
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+          architecture: ${{ matrix.arch }}
+
+      - name: Install pip and pyinstaller
+        run: |
+          python -m ensurepip --upgrade
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Build binary
+        run: pyinstaller otter/otter.py --name otter --onefile
+
+      - name: Get release information
+        id: release_info
+        if: github.event_name == 'release'
+        uses: bruceadams/get-release@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload binary as release asset
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.release_info.outputs.upload_url }}
+          asset_path: "dist/otter${{ matrix.ext }}"
+          asset_name: "otter_${{ matrix.platform }}_${{ matrix.arch }}${{ matrix.ext }}"
+          asset_content_type: application/octet-stream
