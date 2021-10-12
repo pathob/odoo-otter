@@ -35,7 +35,8 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7
+          # this is the currently highest supported version by pyinstaller
+          python-version: 3.9
           architecture: ${{ matrix.arch }}
 
       - name: Install pip, requirements and pyinstaller
@@ -47,6 +48,14 @@ jobs:
 
       - name: Build binary
         run: pyinstaller otter/otter.py --name otter --onefile
+
+      - name: Execute binary (win32)
+        if: matrix.platform == 'win32'
+        run: "dist/otter${{ matrix.ext }} -h"
+
+      - name: Execute binary (linux / darwin)
+        if: matrix.platform != 'win32'
+        run: "./dist/otter -h"
 
       - name: Get release information
         id: release_info

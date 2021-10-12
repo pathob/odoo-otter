@@ -6,6 +6,10 @@ dist/
 *.egg-info
 __pycache__
 
+# pyinstaller
+build/
+otter.spec
+
 # dev
 .idea/
 *.json
