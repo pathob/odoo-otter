@@ -3,11 +3,29 @@ Otter - The Odoo time tracker
 
 Note: This project is still in an early development stage!
 
-## Installation
+## Installation and upgrade
 
-TODO: When PIP package available.an
+Installation and upgrade can simply be done with Pip:
+
+```
+pip install odoo-otter --upgrade
+```
+
+After installation or upgrade, check the installation with:
+
+```
+otter -v
+```
 
 ## Usage
+
+### Help
+
+The help can be accesses with the following command:
+
+```
+otter -h
+```
 
 ### Login to Odoo
 
