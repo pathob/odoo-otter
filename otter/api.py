@@ -61,7 +61,14 @@ def sync_remote_project_tasks(session=database.session()):
 
 
 def sync_local_records(query_date, session=database.session()):
-    records = []  # get_records_until_date(date=query_date, only_unsynced=True, session)
+    records = (
+        session.query(
+            Record
+        )
+        .filter(Record.date <= query_date)
+        .filter(Record.odoo_id.is_(None))  # only unsynced
+        .all()
+    )
 
     if len(records) > 0:
         record_sync_calc = OtterRecordSyncCalculator(records)

@@ -76,6 +76,8 @@ class OtterRecordSyncCalculator(object):
                     target_duration_hours = floor_duration(record.duration_hours())
                     times = times - 1
 
+            # set the fixed values for name and unit_amount
+            record.name = record.description
             record.unit_amount = target_duration_hours
             records.append(record)
 

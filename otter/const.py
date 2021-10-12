@@ -1,7 +1,7 @@
 from pathlib import Path
 
 OTTER_PACKAGE = "odoo-otter"
-OTTER_VERSION = "0.0.4"
+OTTER_VERSION = "0.0.5"
 OTTER_DESCRIPTION = "Otter - The Odoo time tracker"
 OTTER_DIR = str(Path.home()) + "/.otter"
 OTTER_CFG = f"{OTTER_DIR}/config.json"
