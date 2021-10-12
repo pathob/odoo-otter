@@ -10,6 +10,11 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        version: ['3.7', '3.8', '3.9', '3.10']
+      fail-fast: false
+
     runs-on: ubuntu-latest
 
     steps:
@@ -20,8 +25,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7
-          architecture: x64
+          python-version: ${{ matrix.version }}
 
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
@@ -33,13 +37,13 @@ jobs:
           pip install twine
           pip install wheel
 
-      - name: Build
+      - name: Build package
         run: |
           python setup.py sdist bdist_wheel
           twine check dist/*
 
       - name: Publish package to PyPI
-        if: github.event_name == 'release'
+        if: github.event_name == 'release' && matrix.version == '3.7'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
