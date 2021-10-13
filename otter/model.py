@@ -70,10 +70,10 @@ class OtterRecordSyncCalculator(object):
 
             if times > 0:
                 if increase and not ceiled:
-                    target_duration_hours = ceil_duration(record.duration_hours())
+                    target_duration_hours = ceil_duration(record.duration)
                     times = times - 1
                 elif not increase and ceiled:
-                    target_duration_hours = floor_duration(record.duration_hours())
+                    target_duration_hours = floor_duration(record.duration)
                     times = times - 1
 
             # set the fixed values for name and unit_amount
