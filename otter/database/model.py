@@ -108,7 +108,7 @@ class Record(Base):
     def duration(self):
         if self.unit_amount is not None:
             return self.unit_amount
-        return (
+        duration = (
             object_session(self)
             .scalar(
                 select(func.sum((
@@ -118,6 +118,9 @@ class Record(Base):
                 .where(RecordTimeSlice.record_id == self.id)
             )
         )
+        if duration is not None:
+            return duration
+        return 0
 
     @property
     def duration_str(self):
