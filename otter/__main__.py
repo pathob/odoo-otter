@@ -1,13 +1,17 @@
 import logging
 import sys
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
-)
+cfg = deserialize()
+loglevel = cfg['loglevel']
+logging.basicConfig(level=loglevel)
+
+# logging.basicConfig(
+#     level=loglevel,
+#     format="%(asctime)s [%(levelname)s] %(message)s",
+#     handlers=[
+#         logging.StreamHandler(sys.stdout)
+#     ]
+# )
 
 if not hasattr(sys, 'frozen'):
     import os

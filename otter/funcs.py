@@ -203,11 +203,17 @@ def config(args):
     cfg['projects'] = int(projects)
     serialize(cfg)
 
+    loglevel = input_default("Loglevel", cfg['loglevel'] if 'loglevel' in cfg else 0)
+    cfg['loglevel'] = int(loglevel)
+    serialize(cfg)
+
     print("Config successfully written")
 
 
 def login(args):
     cfg = deserialize()
+    url = cfg['url']
+    odoo_db = cfg['db']
 
     username = input_default("Username", cfg['user'] if 'user' in cfg else None)
     cfg['user'] = username
