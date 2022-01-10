@@ -19,7 +19,10 @@ from otter.util.date import *
 
 
 def choose_project_task_id(args):
-    limit = 9  # maybe from config
+    config = deserialize()
+    projects = config['projects']
+
+    limit = int(projects)
 
     records = query_records_most_recent(limit)
 
@@ -180,7 +183,7 @@ def sync(args):
     print("Done.")
 
 
-def login(args):
+def config(args):
     cfg = deserialize()
 
     url = input_default("URL", cfg['url'] if 'url' in cfg else None)
@@ -195,6 +198,18 @@ def login(args):
     odoo_db = input_select_list_default("Database", databases, cfg['db'] if 'db' in cfg else None)
     cfg['db'] = odoo_db
     serialize(cfg)
+
+    projects = input_default("Number of last projects", cfg['projects'] if 'projects' in cfg else 9)
+    cfg['projects'] = int(projects)
+    serialize(cfg)
+
+    print("Config successfully written")
+
+
+def login(args):
+    cfg = deserialize()
+    url = cfg['url']
+    odoo_db = cfg['db']
 
     username = input_default("Username", cfg['user'] if 'user' in cfg else None)
     cfg['user'] = username
