@@ -1,3 +1,5 @@
+import logging
+
 import requests
 import sys
 
@@ -17,9 +19,13 @@ def login(url, db, username, password):
 
     response = requests.post(url + '/web/session/authenticate', json=request_json)
 
+    logging.debug(response.json())
+
     # before: and 'result' in response.json():
-    if response.status_code != 200 or 'session_id' not in response.cookies:
-        print("ERROR DURING LOGIN")
+    if response.status_code != 200 or 'error' in response.json():
+        print("Error during login")
+        if 'error' in response.json():
+            print(response.json()['error']['data']['message'])
         sys.exit(1)
 
     uid = response.json()['result']['uid']
