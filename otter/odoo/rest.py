@@ -22,6 +22,21 @@ def login(url, db, username, password):
         print("ERROR DURING LOGIN")
         sys.exit(1)
 
+    # odooSession.setSessionId(response.getString("session_id"));
+    # odooSession.setUid(response.getInt("uid"));
+    # odooSession.setUserContext(response.getMap("user_context"));
+    # odooSession.setUsername(response.getString("username"));
+
+    # print(response.json()['result']['expiration_date'])
+    # print(response.json()['result']['expiration_reason'])
+    # print(response.json()['result']['user_context'])
+
+    # JSONObject
+    # kwargs = new
+    # JSONObject();
+    # kwargs.put("context", odooSession.getUserContext());
+    # params.put("kwargs", kwargs);
+
     uid = response.json()['result']['uid']
     session = response.cookies['session_id']
 

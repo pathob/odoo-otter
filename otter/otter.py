@@ -55,9 +55,12 @@ def main_internal(argv):
     subcommand.add_argument('--date', nargs="?", const="YESTERDAY", default="YESTERDAY")
     subcommand.set_defaults(func=funcs.sync)
 
-    subcommand = commands.add_parser('login', help="Login to Odoo")
+    subcommand = commands.add_parser('config', help="Config connection to Odoo")
     subcommand.add_argument('--url')
     subcommand.add_argument('--database')
+    subcommand.set_defaults(func=funcs.config)
+
+    subcommand = commands.add_parser('login', help="Login to Odoo")
     subcommand.add_argument('--username')
     subcommand.add_argument('--password')
     subcommand.set_defaults(func=funcs.login)
