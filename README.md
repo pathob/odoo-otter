@@ -35,6 +35,18 @@ The help can be accesses with the following command:
 otter -h
 ```
 
+### Configure connection to Odoo
+
+When using Otter for the first time, you need to configure the connection to Odoo and your Otter:
+
+```
+otter config
+```
+
+Follow the instructions on the screen.
+Enter the Odoo URL, select a database from the list and select the number of recent projects you want to get displayed.
+If all data was entered correctly, you can now login to Odoo.
+
 ### Login to Odoo
 
 When using Otter for the first time or when your Odoo session expired, login to Odoo:
@@ -43,8 +55,7 @@ When using Otter for the first time or when your Odoo session expired, login to 
 otter login
 ```
 
-Follow the instructions on the screen.
-Enter the Odoo URL, select a database from the list, enter your username and your password.
+Follow the instructions on the screen; enter your username and your password.
 If all data was entered correctly, you are logged in to Odoo and your session will stored locally (your password will not be stored!).
 
 NOTE: Currently, the login is only valid for about a week.
